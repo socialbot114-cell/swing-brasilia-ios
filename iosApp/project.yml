@@ -17,10 +17,8 @@ targets:
       - path: Resources/Assets.xcassets
         buildPhase: resources
       - path: Resources/Catalog
-        type: folder
         buildPhase: resources
       - path: Resources/Images
-        type: folder
         buildPhase: resources
       - path: Resources/PrivacyInfo.xcprivacy
         buildPhase: resources

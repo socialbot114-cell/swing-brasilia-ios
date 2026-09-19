@@ -62,7 +62,7 @@ final class VenueCatalog: ObservableObject {
     }
 
     static func loadBundled() -> [Venue] {
-        guard let url = Bundle.main.url(forResource: "venues", withExtension: "json", subdirectory: "Catalog") else {
+        guard let url = Bundle.main.url(forResource: "venues", withExtension: "json") else {
             return []
         }
         do {
