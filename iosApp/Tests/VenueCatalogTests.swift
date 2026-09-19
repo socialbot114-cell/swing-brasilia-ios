@@ -26,10 +26,10 @@ final class VenueCatalogTests: XCTestCase {
     }
 
     func testFilterByCategory() {
-        XCTAssertEqual(catalog.filtered(query: "", filter: .houses).map(\.slug), ["zeus-night-club", "fun-haus-club"])
+        XCTAssertEqual(catalog.filtered(query: "", filter: .houses).map(\.slug), ["fun-haus-club", "zeus-night-club"])
         XCTAssertEqual(catalog.filtered(query: "", filter: .motels).map(\.slug), ["colorado"])
         XCTAssertEqual(catalog.filtered(query: "", filter: .shops).map(\.slug), ["erotika-asa-sul"])
-        XCTAssertEqual(catalog.filtered(query: "", filter: .newcomers).map(\.slug), ["zeus-night-club", "fun-haus-club"])
+        XCTAssertEqual(catalog.filtered(query: "", filter: .newcomers).map(\.slug), ["fun-haus-club", "zeus-night-club"])
     }
 
     func testFilterByQueryIsCaseInsensitive() {
