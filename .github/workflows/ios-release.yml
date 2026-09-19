@@ -1,0 +1,353 @@
+name: iOS TestFlight
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  release:
+    runs-on: macos-26
+    timeout-minutes: 60
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+
+      - name: Validate required secrets
+        env:
+          APPLE_API_KEY_P8: ${{ secrets.APPLE_API_KEY_P8 }}
+          APPLE_API_KEY_ID: ${{ secrets.APPLE_API_KEY_ID }}
+          APPLE_API_ISSUER_ID: ${{ secrets.APPLE_API_ISSUER_ID }}
+          APPLE_DISTRIBUTION_CERT: ${{ secrets.APPLE_DISTRIBUTION_CERT }}
+          APPLE_DISTRIBUTION_KEY: ${{ secrets.APPLE_DISTRIBUTION_KEY }}
+          APPLE_PROVISIONING_PROFILE: ${{ secrets.APPLE_PROVISIONING_PROFILE }}
+        run: |
+          set -euo pipefail
+          for secret_name in \
+            APPLE_API_KEY_P8 \
+            APPLE_API_KEY_ID \
+            APPLE_API_ISSUER_ID \
+            APPLE_DISTRIBUTION_CERT \
+            APPLE_DISTRIBUTION_KEY \
+            APPLE_PROVISIONING_PROFILE; do
+            if [[ -z "${!secret_name:-}" ]]; then
+              printf 'Required secret %s is not configured.\n' "$secret_name" >&2
+              exit 1
+            fi
+          done
+
+      - name: Validate content
+        run: python3 scripts/validate_content.py
+
+      - name: Install XcodeGen
+        run: brew install xcodegen
+
+      - name: Generate project
+        working-directory: iosApp
+        run: xcodegen generate --spec project.yml
+
+      - name: Verify release SDK
+        run: |
+          set -euo pipefail
+          xcodebuild -version
+          sdk_version="$(xcrun --sdk iphoneos --show-sdk-version)"
+          sdk_major="${sdk_version%%.*}"
+          if (( sdk_major < 26 )); then
+            printf 'App Store Connect requires iOS SDK 26 or later; found %s.\n' "$sdk_version" >&2
+            exit 1
+          fi
+
+      - name: Read project metadata
+        run: |
+          set -euo pipefail
+          xcodebuild \
+            -project iosApp/SwingBrasilia.xcodeproj \
+            -scheme SwingBrasilia \
+            -showBuildSettings \
+            -json > "$RUNNER_TEMP/build-settings.json"
+          python3 <<'PY'
+          import json
+          import os
+
+          with open(os.path.join(os.environ["RUNNER_TEMP"], "build-settings.json")) as file:
+              targets = json.load(file)
+
+          target = next((item for item in targets if item.get("target") == "SwingBrasilia"), None)
+          if target is None:
+              raise SystemExit("SwingBrasilia build settings were not found")
+
+          settings = target["buildSettings"]
+          keys = {
+              "MARKETING_VERSION": "MARKETING_VERSION",
+              "BUILD_NUMBER": "CURRENT_PROJECT_VERSION",
+              "APP_BUNDLE_ID": "PRODUCT_BUNDLE_IDENTIFIER",
+              "FULL_PRODUCT_NAME": "FULL_PRODUCT_NAME",
+          }
+          with open(os.environ["GITHUB_ENV"], "a") as environment:
+              for output_name, setting_name in keys.items():
+                  value = settings.get(setting_name)
+                  if not value:
+                      raise SystemExit(f"Missing build setting: {setting_name}")
+                  environment.write(f"{output_name}={value}\n")
+          PY
+
+      - name: Select available iPhone simulator
+        run: |
+          set -euo pipefail
+          simulator_udid="$(
+            xcrun simctl list devices available -j | python3 -c '
+          import json
+          import re
+          import sys
+
+          devices_by_runtime = json.load(sys.stdin)["devices"]
+          candidates = []
+          for runtime, devices in devices_by_runtime.items():
+              match = re.search(r"iOS-(\d+)(?:-(\d+))?(?:-(\d+))?$", runtime)
+              version = tuple(map(int, match.groups(default="0"))) if match else (0, 0, 0)
+              for device in devices:
+                  if device.get("isAvailable") and device.get("name", "").startswith("iPhone"):
+                      candidates.append((version, device["name"], device["udid"]))
+
+          if not candidates:
+              raise SystemExit("No available iPhone simulator was found")
+          version, name, udid = max(candidates)
+          version_text = ".".join(map(str, version))
+          print(udid)
+          print(f"Selected {name} on iOS {version_text}", file=sys.stderr)
+          '
+          )"
+          test -n "$simulator_udid"
+          printf 'SIMULATOR_UDID=%s\n' "$simulator_udid" >> "$GITHUB_ENV"
+
+      - name: Run unit tests without signing
+        run: |
+          set -euo pipefail
+          xcodebuild test \
+            -project iosApp/SwingBrasilia.xcodeproj \
+            -scheme SwingBrasilia \
+            -destination "platform=iOS Simulator,id=$SIMULATOR_UDID" \
+            CODE_SIGNING_ALLOWED=NO
+
+      - name: Restore App Store Connect key
+        env:
+          APPLE_API_KEY_P8: ${{ secrets.APPLE_API_KEY_P8 }}
+          APPLE_API_KEY_ID: ${{ secrets.APPLE_API_KEY_ID }}
+        run: |
+          set -euo pipefail
+          mkdir -p "$HOME/private_keys"
+          chmod 700 "$HOME/private_keys"
+          api_key_path="$HOME/private_keys/AuthKey_${APPLE_API_KEY_ID}.p8"
+          printf '%s' "$APPLE_API_KEY_P8" > "$api_key_path"
+          chmod 600 "$api_key_path"
+          test -s "$api_key_path"
+          printf 'API_KEY_PATH=%s\n' "$api_key_path" >> "$GITHUB_ENV"
+
+      - name: Install signing assets
+        env:
+          APPLE_DISTRIBUTION_CERT: ${{ secrets.APPLE_DISTRIBUTION_CERT }}
+          APPLE_DISTRIBUTION_KEY: ${{ secrets.APPLE_DISTRIBUTION_KEY }}
+          APPLE_PROVISIONING_PROFILE: ${{ secrets.APPLE_PROVISIONING_PROFILE }}
+        run: |
+          set -euo pipefail
+          certificate_path="$RUNNER_TEMP/distribution.cer"
+          private_key_path="$RUNNER_TEMP/distribution.key"
+          profile_path="$RUNNER_TEMP/distribution.mobileprovision"
+          profile_plist="$RUNNER_TEMP/distribution-profile.plist"
+          keychain_path="$RUNNER_TEMP/signing.keychain-db"
+          keychain_password="$(openssl rand -hex 32)"
+
+          printf '%s' "$APPLE_DISTRIBUTION_CERT" | base64 --decode > "$certificate_path"
+          printf '%s' "$APPLE_DISTRIBUTION_KEY" | base64 --decode > "$private_key_path"
+          printf '%s' "$APPLE_PROVISIONING_PROFILE" | base64 --decode > "$profile_path"
+          test -s "$certificate_path"
+          test -s "$private_key_path"
+          test -s "$profile_path"
+
+          security cms -D -i "$profile_path" > "$profile_plist"
+          python3 <<'PY'
+          import datetime
+          import os
+          import plistlib
+
+          path = os.path.join(os.environ["RUNNER_TEMP"], "distribution-profile.plist")
+          with open(path, "rb") as file:
+              profile = plistlib.load(file)
+
+          expiration = profile["ExpirationDate"]
+          now = datetime.datetime.now(datetime.timezone.utc)
+          if expiration.tzinfo is None:
+              now = now.replace(tzinfo=None)
+          if expiration <= now:
+              raise SystemExit(f"Provisioning profile expired on {expiration.isoformat()}")
+
+          team_ids = profile.get("TeamIdentifier", [])
+          if not team_ids:
+              raise SystemExit("Provisioning profile has no TeamIdentifier")
+
+          application_identifier = profile.get("Entitlements", {}).get("application-identifier", "")
+          bundle_id = os.environ["APP_BUNDLE_ID"]
+          if not application_identifier.endswith(f".{bundle_id}"):
+              raise SystemExit("Provisioning profile does not match the app bundle identifier")
+
+          values = {
+              "PROFILE_NAME": profile["Name"],
+              "PROFILE_UUID": profile["UUID"],
+              "TEAM_ID": team_ids[0],
+          }
+          with open(os.environ["GITHUB_ENV"], "a") as environment:
+              for key, value in values.items():
+                  environment.write(f"{key}={value}\n")
+          PY
+
+          profile_uuid="$(/usr/libexec/PlistBuddy -c 'Print :UUID' "$profile_plist")"
+          installed_profile="$HOME/Library/MobileDevice/Provisioning Profiles/${profile_uuid}.mobileprovision"
+          mkdir -p "$(dirname "$installed_profile")"
+          cp "$profile_path" "$installed_profile"
+          printf 'INSTALLED_PROFILE_PATH=%s\n' "$installed_profile" >> "$GITHUB_ENV"
+
+          security create-keychain -p "$keychain_password" "$keychain_path"
+          security set-keychain-settings -lut 21600 "$keychain_path"
+          security unlock-keychain -p "$keychain_password" "$keychain_path"
+          security import "$private_key_path" -k "$keychain_path" -P "" -A -T /usr/bin/codesign
+          security import "$certificate_path" -k "$keychain_path" -P "" -T /usr/bin/codesign
+          security set-key-partition-list -S apple-tool:,apple: -s -k "$keychain_password" "$keychain_path"
+          security list-keychains -d user -s "$keychain_path"
+
+          signing_identity="$(security find-identity -v -p codesigning "$keychain_path" | perl -ne 'if (/"(.*)"/) { print $1; exit }')"
+          if [[ -z "$signing_identity" ]]; then
+            printf 'No code-signing identity was found in the temporary keychain.\n' >&2
+            exit 1
+          fi
+          printf 'SIGNING_IDENTITY=%s\n' "$signing_identity" >> "$GITHUB_ENV"
+
+      - name: Archive signed app
+        run: |
+          set -euo pipefail
+          xcodebuild archive \
+            -project iosApp/SwingBrasilia.xcodeproj \
+            -scheme SwingBrasilia \
+            -configuration Release \
+            -destination 'generic/platform=iOS' \
+            -archivePath "$RUNNER_TEMP/SwingBrasilia.xcarchive" \
+            CODE_SIGN_STYLE=Manual \
+            CODE_SIGN_IDENTITY="$SIGNING_IDENTITY" \
+            DEVELOPMENT_TEAM="$TEAM_ID" \
+            PROVISIONING_PROFILE_SPECIFIER="$PROFILE_NAME" \
+            TARGETED_DEVICE_FAMILY=1 \
+            MARKETING_VERSION="$MARKETING_VERSION" \
+            CURRENT_PROJECT_VERSION="$BUILD_NUMBER"
+
+      - name: Verify archived app
+        run: |
+          set -euo pipefail
+          app="$RUNNER_TEMP/SwingBrasilia.xcarchive/Products/Applications/$FULL_PRODUCT_NAME"
+          test -d "$app"
+          test -f "$app/Assets.car"
+          test -f "$app/Catalog/venues.json"
+          test -f "$app/Images/hero.png"
+          test -f "$app/PrivacyInfo.xcprivacy"
+          test "$(/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' "$app/Info.plist")" = "$MARKETING_VERSION"
+          test "$(/usr/libexec/PlistBuddy -c 'Print :CFBundleVersion' "$app/Info.plist")" = "$BUILD_NUMBER"
+          test -n "$(/usr/libexec/PlistBuddy -c 'Print :CFBundleIconName' "$app/Info.plist")"
+          codesign --verify --deep --strict "$app"
+
+      - name: Prepare export options
+        run: |
+          set -euo pipefail
+          python3 <<'PY'
+          import os
+          import plistlib
+
+          with open("iosApp/ExportOptions.plist", "rb") as file:
+              options = plistlib.load(file)
+          options["teamID"] = os.environ["TEAM_ID"]
+          options["provisioningProfiles"] = {
+              os.environ["APP_BUNDLE_ID"]: os.environ["PROFILE_NAME"]
+          }
+          output = os.path.join(os.environ["RUNNER_TEMP"], "ExportOptions.plist")
+          with open(output, "wb") as file:
+              plistlib.dump(options, file)
+          PY
+
+      - name: Export IPA
+        run: |
+          set -euo pipefail
+          xcodebuild -exportArchive \
+            -archivePath "$RUNNER_TEMP/SwingBrasilia.xcarchive" \
+            -exportOptionsPlist "$RUNNER_TEMP/ExportOptions.plist" \
+            -exportPath "$RUNNER_TEMP/export"
+
+      - name: Validate exported IPA
+        run: |
+          set -euo pipefail
+          shopt -s nullglob
+          ipa_files=("$RUNNER_TEMP"/export/*.ipa)
+          if [[ ${#ipa_files[@]} -ne 1 ]]; then
+            printf 'Expected exactly one IPA, found %s.\n' "${#ipa_files[@]}" >&2
+            exit 1
+          fi
+
+          unpacked_path="$RUNNER_TEMP/ipa-unpacked"
+          rm -rf "$unpacked_path"
+          mkdir -p "$unpacked_path"
+          unzip -q "${ipa_files[0]}" -d "$unpacked_path"
+
+          apps=("$unpacked_path"/Payload/*.app)
+          if [[ ${#apps[@]} -ne 1 ]]; then
+            printf 'Expected exactly one app in the IPA, found %s.\n' "${#apps[@]}" >&2
+            exit 1
+          fi
+          app="${apps[0]}"
+          test -f "$app/Assets.car"
+          test -f "$app/Catalog/venues.json"
+          test -f "$app/Images/hero.png"
+          test -f "$app/PrivacyInfo.xcprivacy"
+          test "$(/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' "$app/Info.plist")" = "$MARKETING_VERSION"
+          test "$(/usr/libexec/PlistBuddy -c 'Print :CFBundleVersion' "$app/Info.plist")" = "$BUILD_NUMBER"
+          test -n "$(/usr/libexec/PlistBuddy -c 'Print :CFBundleIconName' "$app/Info.plist")"
+          codesign --verify --deep --strict "$app"
+
+      - name: Upload IPA artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: swing-brasilia-ios-${{ env.MARKETING_VERSION }}-${{ env.BUILD_NUMBER }}
+          path: ${{ runner.temp }}/export/*.ipa
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Upload to TestFlight
+        env:
+          APPLE_API_KEY_ID: ${{ secrets.APPLE_API_KEY_ID }}
+          APPLE_API_ISSUER_ID: ${{ secrets.APPLE_API_ISSUER_ID }}
+        run: |
+          set -euo pipefail
+          shopt -s nullglob
+          ipa_files=("$RUNNER_TEMP"/export/*.ipa)
+          if [[ ${#ipa_files[@]} -ne 1 ]]; then
+            printf 'Expected exactly one IPA, found %s.\n' "${#ipa_files[@]}" >&2
+            exit 1
+          fi
+          xcrun altool \
+            --upload-app \
+            --type ios \
+            --file "${ipa_files[0]}" \
+            --apiKey "$APPLE_API_KEY_ID" \
+            --apiIssuer "$APPLE_API_ISSUER_ID"
+
+      - name: Clean up signing assets
+        if: always()
+        run: |
+          security delete-keychain "$RUNNER_TEMP/signing.keychain-db" 2>/dev/null || true
+          if [[ -n "${INSTALLED_PROFILE_PATH:-}" ]]; then
+            rm -f "$INSTALLED_PROFILE_PATH"
+          fi
+          if [[ -n "${API_KEY_PATH:-}" ]]; then
+            rm -f "$API_KEY_PATH"
+          fi
+          rm -f \
+            "$RUNNER_TEMP/distribution.cer" \
+            "$RUNNER_TEMP/distribution.key" \
+            "$RUNNER_TEMP/distribution.mobileprovision" \
+            "$RUNNER_TEMP/distribution-profile.plist"

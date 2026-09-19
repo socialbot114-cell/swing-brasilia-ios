@@ -1,0 +1,79 @@
+{
+  "schema": 1,
+  "status": "pending-license-review",
+  "note": "Fotografias portadas do portal swingbrasilia.fun. Preencha author, source, license e reviewStatus antes da submissão à App Store.",
+  "items": [
+    {
+      "id": "hero",
+      "file": "iosApp/Resources/Images/hero.png",
+      "name": "Hero — trio adulto em lounge com Brasília ao fundo",
+      "author": "",
+      "source": "swingbrasilia.fun (public/hero.png)",
+      "license": "",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "lounge",
+      "file": "iosApp/Resources/Images/lounge.png",
+      "name": "Lounge com sofás curvos",
+      "author": "",
+      "source": "swingbrasilia.fun (public/lounge.png)",
+      "license": "",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "zeus-logo",
+      "file": "iosApp/Resources/Images/zeus-logo.png",
+      "name": "Logo Zeus Night Club",
+      "author": "",
+      "source": "swingbrasilia.fun (public/zeus-logo.png)",
+      "license": "",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "fun-haus-logo",
+      "file": "iosApp/Resources/Images/fun-haus-logo.jpg",
+      "name": "Logo Fun Haus Club",
+      "author": "",
+      "source": "swingbrasilia.fun (public/fun-haus-logo.jpg)",
+      "license": "",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "night-atmosphere",
+      "file": "iosApp/Resources/Images/night-atmosphere.jpg",
+      "name": "Atmosfera urbana noturna",
+      "author": "",
+      "source": "swingbrasilia.fun (public/images/night-atmosphere.jpg)",
+      "license": "",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "architecture-detail",
+      "file": "iosApp/Resources/Images/architecture-detail.jpg",
+      "name": "Arquitetura contemporânea em vidro",
+      "author": "",
+      "source": "swingbrasilia.fun (public/images/architecture-detail.jpg)",
+      "license": "",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "architecture-shadow",
+      "file": "iosApp/Resources/Images/architecture-shadow.jpg",
+      "name": "Geometria e luz em composição noturna",
+      "author": "",
+      "source": "swingbrasilia.fun (public/images/architecture-shadow.jpg)",
+      "license": "",
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "app-icon",
+      "file": "iosApp/Resources/Assets.xcassets/AppIcon.appiconset/AppIcon-1024.png",
+      "name": "Ícone do app (monograma S)",
+      "author": "Projeto Swing Brasília",
+      "source": "gerado internamente",
+      "license": "própria",
+      "reviewStatus": "approved"
+    }
+  ]
+}

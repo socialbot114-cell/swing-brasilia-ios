@@ -1,0 +1,762 @@
+{
+  "version": 1,
+  "venues": [
+    {
+      "slug": "zeus-night-club",
+      "name": "Zeus Night Club",
+      "region": "Águas Claras",
+      "area": "Brasília, DF",
+      "category": "Casa liberal",
+      "summary": "Registro editorial de uma casa adulta na região de Águas Claras. Consulte os canais públicos antes de visitar.",
+      "coordinates": {
+        "latitude": -15.8398,
+        "longitude": -48.0281
+      },
+      "logo": "zeus-logo.png",
+      "theme": "red",
+      "status": "Informação pública",
+      "updatedAt": "11 de setembro de 2026",
+      "sourceLabel": "Pesquisa pública",
+      "sourceUrl": "https://www.google.com/search?q=Zeus+Night+Club+Bras%C3%ADlia",
+      "newcomerFriendly": true,
+      "gallery": [
+        "night-atmosphere.jpg",
+        "architecture-shadow.jpg"
+      ],
+      "editorialSignals": [
+        "Perfil para iniciantes",
+        "Informação pública"
+      ],
+      "notes": [
+        "Localização exibida por região, ainda não confirmada pela casa.",
+        "Programação, valores e regras devem ser consultados no canal oficial."
+      ]
+    },
+    {
+      "slug": "fun-haus-club",
+      "name": "Fun Haus Club",
+      "region": "SAAN",
+      "area": "Brasília, DF",
+      "category": "Casa liberal",
+      "summary": "Registro editorial de um espaço adulto na região do SAAN. Confirme agenda e condições diretamente com a casa.",
+      "coordinates": {
+        "latitude": -15.7615,
+        "longitude": -47.9477
+      },
+      "logo": "fun-haus-logo.jpg",
+      "theme": "ivory",
+      "status": "Informação pública",
+      "updatedAt": "11 de setembro de 2026",
+      "sourceLabel": "Pesquisa pública",
+      "sourceUrl": "https://www.google.com/search?q=Fun+Haus+Club+Bras%C3%ADlia",
+      "newcomerFriendly": true,
+      "featured": true,
+      "gallery": [
+        "night-atmosphere.jpg",
+        "architecture-detail.jpg",
+        "architecture-shadow.jpg"
+      ],
+      "editorialSignals": [
+        "Perfil para iniciantes",
+        "Destaque editorial",
+        "Informação pública"
+      ],
+      "isSponsored": true,
+      "sponsorLabel": "Anúncio · parceiro em evidência",
+      "notes": [
+        "O marcador representa a região informada, não a entrada exata.",
+        "Não publicamos valores ou regras sem confirmação atualizada."
+      ]
+    },
+    {
+      "slug": "via-sul-motel-boutique",
+      "name": "Via Sul Motel Boutique",
+      "region": "Ceilândia",
+      "area": "Brasília, DF",
+      "category": "Motel e suíte",
+      "summary": "Registro público de um motel ou suíte na região de Ceilândia. Confirme informações diretamente com o estabelecimento.",
+      "coordinates": {
+        "latitude": -15.82,
+        "longitude": -48.112
+      },
+      "theme": "red",
+      "status": "Informação pública",
+      "updatedAt": "11 de setembro de 2026",
+      "sourceLabel": "Pesquisa pública",
+      "sourceUrl": "https://www.google.com/search?q=Via Sul Motel Boutique Ceilândia DF",
+      "newcomerFriendly": false,
+      "gallery": [
+        "night-atmosphere.jpg",
+        "architecture-detail.jpg"
+      ],
+      "editorialSignals": [
+        "Registro público",
+        "Não verificado"
+      ],
+      "notes": [
+        "Registro reunido a partir de referências públicas e sujeito a atualização.",
+        "Endereço, funcionamento, valores e regras devem ser confirmados diretamente."
+      ]
+    },
+    {
+      "slug": "a2-suites",
+      "name": "A2 Suítes",
+      "region": "Candangolândia",
+      "area": "Brasília, DF",
+      "category": "Motel e suíte",
+      "summary": "Registro público de um motel ou suíte na região de Candangolândia. Confirme informações diretamente com o estabelecimento.",
+      "coordinates": {
+        "latitude": -15.85,
+        "longitude": -47.97
+      },
+      "theme": "red",
+      "status": "Informação pública",
+      "updatedAt": "11 de setembro de 2026",
+      "sourceLabel": "Pesquisa pública",
+      "sourceUrl": "https://www.google.com/search?q=A2 Suítes Candangolândia DF",
+      "newcomerFriendly": false,
+      "gallery": [
+        "night-atmosphere.jpg",
+        "architecture-detail.jpg"
+      ],
+      "editorialSignals": [
+        "Registro público",
+        "Não verificado"
+      ],
+      "notes": [
+        "Registro reunido a partir de referências públicas e sujeito a atualização.",
+        "Endereço, funcionamento, valores e regras devem ser confirmados diretamente."
+      ]
+    },
+    {
+      "slug": "colorado",
+      "name": "Colorado",
+      "region": "Sobradinho / Colorado",
+      "area": "Brasília, DF",
+      "category": "Motel e suíte",
+      "summary": "Registro público de um motel ou suíte na região de Sobradinho / Colorado. Confirme informações diretamente com o estabelecimento.",
+      "coordinates": {
+        "latitude": -15.65,
+        "longitude": -47.75
+      },
+      "theme": "red",
+      "status": "Informação pública",
+      "updatedAt": "11 de setembro de 2026",
+      "sourceLabel": "Pesquisa pública",
+      "sourceUrl": "https://www.google.com/search?q=Colorado motel Sobradinho DF",
+      "newcomerFriendly": false,
+      "gallery": [
+        "night-atmosphere.jpg",
+        "architecture-detail.jpg"
+      ],
+      "editorialSignals": [
+        "Registro público",
+        "Não verificado"
+      ],
+      "notes": [
+        "Registro reunido a partir de referências públicas e sujeito a atualização.",
+        "Endereço, funcionamento, valores e regras devem ser confirmados diretamente."
+      ]
+    },
+    {
+      "slug": "drops-motel-brasilia",
+      "name": "Drops Motel Brasília",
+      "region": "Núcleo Bandeirante",
+      "area": "Brasília, DF",
+      "category": "Motel e suíte",
+      "summary": "Registro público de um motel ou suíte na região de Núcleo Bandeirante. Confirme informações diretamente com o estabelecimento.",
+      "coordinates": {
+        "latitude": -15.87,
+        "longitude": -47.97
+      },
+      "theme": "red",
+      "status": "Informação pública",
+      "updatedAt": "11 de setembro de 2026",
+      "sourceLabel": "Pesquisa pública",
+      "sourceUrl": "https://www.google.com/search?q=Drops Motel Brasília",
+      "newcomerFriendly": false,
+      "gallery": [
+        "night-atmosphere.jpg",
+        "architecture-detail.jpg"
+      ],
+      "editorialSignals": [
+        "Registro público",
+        "Não verificado"
+      ],
+      "notes": [
+        "Registro reunido a partir de referências públicas e sujeito a atualização.",
+        "Endereço, funcionamento, valores e regras devem ser confirmados diretamente."
+      ]
+    },
+    {
+      "slug": "bliss-motel",
+      "name": "Bliss Motel",
+      "region": "Núcleo Bandeirante",
+      "area": "Brasília, DF",
+      "category": "Motel e suíte",
+      "summary": "Registro público de um motel ou suíte na região de Núcleo Bandeirante. Confirme informações diretamente com o estabelecimento.",
+      "coordinates": {
+        "latitude": -15.86,
+        "longitude": -47.96
+      },
+      "theme": "red",
+      "status": "Informação pública",
+      "updatedAt": "11 de setembro de 2026",
+      "sourceLabel": "Pesquisa pública",
+      "sourceUrl": "https://www.google.com/search?q=Bliss Motel Brasília",
+      "newcomerFriendly": false,
+      "gallery": [
+        "night-atmosphere.jpg",
+        "architecture-detail.jpg"
+      ],
+      "editorialSignals": [
+        "Registro público",
+        "Não verificado"
+      ],
+      "notes": [
+        "Registro reunido a partir de referências públicas e sujeito a atualização.",
+        "Endereço, funcionamento, valores e regras devem ser confirmados diretamente."
+      ]
+    },
+    {
+      "slug": "o-motel",
+      "name": "O Motel",
+      "region": "Núcleo Bandeirante",
+      "area": "Brasília, DF",
+      "category": "Motel e suíte",
+      "summary": "Registro público de um motel ou suíte na região de Núcleo Bandeirante. Confirme informações diretamente com o estabelecimento.",
+      "coordinates": {
+        "latitude": -15.87,
+        "longitude": -47.97
+      },
+      "theme": "red",
+      "status": "Informação pública",
+      "updatedAt": "11 de setembro de 2026",
+      "sourceLabel": "Pesquisa pública",
+      "sourceUrl": "https://www.google.com/search?q=O Motel Núcleo Bandeirante Brasília",
+      "newcomerFriendly": false,
+      "gallery": [
+        "night-atmosphere.jpg",
+        "architecture-detail.jpg"
+      ],
+      "editorialSignals": [
+        "Registro público",
+        "Não verificado"
+      ],
+      "notes": [
+        "Registro reunido a partir de referências públicas e sujeito a atualização.",
+        "Endereço, funcionamento, valores e regras devem ser confirmados diretamente."
+      ]
+    },
+    {
+      "slug": "inside-suites-i",
+      "name": "Inside Suítes I Motel",
+      "region": "Taguatinga",
+      "area": "Brasília, DF",
+      "category": "Motel e suíte",
+      "summary": "Registro público de um motel ou suíte na região de Taguatinga. Confirme informações diretamente com o estabelecimento.",
+      "coordinates": {
+        "latitude": -15.83,
+        "longitude": -48.06
+      },
+      "theme": "red",
+      "status": "Informação pública",
+      "updatedAt": "11 de setembro de 2026",
+      "sourceLabel": "Pesquisa pública",
+      "sourceUrl": "https://www.google.com/search?q=Inside Suítes I Motel Taguatinga",
+      "newcomerFriendly": false,
+      "gallery": [
+        "night-atmosphere.jpg",
+        "architecture-detail.jpg"
+      ],
+      "editorialSignals": [
+        "Registro público",
+        "Não verificado"
+      ],
+      "notes": [
+        "Registro reunido a partir de referências públicas e sujeito a atualização.",
+        "Endereço, funcionamento, valores e regras devem ser confirmados diretamente."
+      ]
+    },
+    {
+      "slug": "flamingo-motel",
+      "name": "Flamingo Motel",
+      "region": "BR-020 / Colorado",
+      "area": "Brasília, DF",
+      "category": "Motel e suíte",
+      "summary": "Registro público de um motel ou suíte na região de BR-020 / Colorado. Confirme informações diretamente com o estabelecimento.",
+      "coordinates": {
+        "latitude": -15.64,
+        "longitude": -47.77
+      },
+      "theme": "red",
+      "status": "Informação pública",
+      "updatedAt": "11 de setembro de 2026",
+      "sourceLabel": "Pesquisa pública",
+      "sourceUrl": "https://www.google.com/search?q=Flamingo Motel Brasília Colorado",
+      "newcomerFriendly": false,
+      "gallery": [
+        "night-atmosphere.jpg",
+        "architecture-detail.jpg"
+      ],
+      "editorialSignals": [
+        "Registro público",
+        "Não verificado"
+      ],
+      "notes": [
+        "Registro reunido a partir de referências públicas e sujeito a atualização.",
+        "Endereço, funcionamento, valores e regras devem ser confirmados diretamente."
+      ]
+    },
+    {
+      "slug": "fantasy-motel",
+      "name": "Fantasy Motel",
+      "region": "SIA",
+      "area": "Brasília, DF",
+      "category": "Motel e suíte",
+      "summary": "Registro público de um motel ou suíte na região de SIA. Confirme informações diretamente com o estabelecimento.",
+      "coordinates": {
+        "latitude": -15.79,
+        "longitude": -47.94
+      },
+      "theme": "red",
+      "status": "Informação pública",
+      "updatedAt": "11 de setembro de 2026",
+      "sourceLabel": "Pesquisa pública",
+      "sourceUrl": "https://www.google.com/search?q=Fantasy Motel SIA Brasília",
+      "newcomerFriendly": false,
+      "gallery": [
+        "night-atmosphere.jpg",
+        "architecture-detail.jpg"
+      ],
+      "editorialSignals": [
+        "Registro público",
+        "Não verificado"
+      ],
+      "notes": [
+        "Registro reunido a partir de referências públicas e sujeito a atualização.",
+        "Endereço, funcionamento, valores e regras devem ser confirmados diretamente."
+      ]
+    },
+    {
+      "slug": "park-way-motel",
+      "name": "Park Way",
+      "region": "Núcleo Bandeirante",
+      "area": "Brasília, DF",
+      "category": "Motel e suíte",
+      "summary": "Registro público de um motel ou suíte na região de Núcleo Bandeirante. Confirme informações diretamente com o estabelecimento.",
+      "coordinates": {
+        "latitude": -15.88,
+        "longitude": -47.94
+      },
+      "theme": "red",
+      "status": "Informação pública",
+      "updatedAt": "11 de setembro de 2026",
+      "sourceLabel": "Pesquisa pública",
+      "sourceUrl": "https://www.google.com/search?q=Park Way motel Brasília",
+      "newcomerFriendly": false,
+      "gallery": [
+        "night-atmosphere.jpg",
+        "architecture-detail.jpg"
+      ],
+      "editorialSignals": [
+        "Registro público",
+        "Não verificado"
+      ],
+      "notes": [
+        "Registro reunido a partir de referências públicas e sujeito a atualização.",
+        "Endereço, funcionamento, valores e regras devem ser confirmados diretamente."
+      ]
+    },
+    {
+      "slug": "erotika-asa-sul",
+      "name": "Erotika Sex Shop Asa Sul",
+      "region": "Asa Sul",
+      "area": "Brasília, DF",
+      "category": "Sex shop e boutique",
+      "summary": "Registro público de uma loja de produtos adultos na região de Asa Sul. Confirme informações diretamente com o estabelecimento.",
+      "coordinates": {
+        "latitude": -15.81,
+        "longitude": -47.91
+      },
+      "theme": "red",
+      "status": "Informação pública",
+      "updatedAt": "11 de setembro de 2026",
+      "sourceLabel": "Pesquisa pública",
+      "sourceUrl": "https://www.google.com/search?q=Erotika Sex Shop Asa Sul Brasília",
+      "newcomerFriendly": false,
+      "gallery": [
+        "night-atmosphere.jpg",
+        "architecture-detail.jpg"
+      ],
+      "editorialSignals": [
+        "Registro público",
+        "Não verificado"
+      ],
+      "notes": [
+        "Registro reunido a partir de referências públicas e sujeito a atualização.",
+        "Endereço, funcionamento, valores e regras devem ser confirmados diretamente."
+      ]
+    },
+    {
+      "slug": "amor-de-luxo-asa-sul",
+      "name": "Sex Shop Amor de Luxo · Asa Sul",
+      "region": "Asa Sul",
+      "area": "Brasília, DF",
+      "category": "Sex shop e boutique",
+      "summary": "Registro público de uma loja de produtos adultos na região de Asa Sul. Confirme informações diretamente com o estabelecimento.",
+      "coordinates": {
+        "latitude": -15.81,
+        "longitude": -47.91
+      },
+      "theme": "red",
+      "status": "Informação pública",
+      "updatedAt": "11 de setembro de 2026",
+      "sourceLabel": "Pesquisa pública",
+      "sourceUrl": "https://www.google.com/search?q=Sex Shop Amor de Luxo Asa Sul Brasília",
+      "newcomerFriendly": false,
+      "gallery": [
+        "night-atmosphere.jpg",
+        "architecture-detail.jpg"
+      ],
+      "editorialSignals": [
+        "Registro público",
+        "Não verificado"
+      ],
+      "notes": [
+        "Registro reunido a partir de referências públicas e sujeito a atualização.",
+        "Endereço, funcionamento, valores e regras devem ser confirmados diretamente."
+      ]
+    },
+    {
+      "slug": "magia-do-amor-asa-norte",
+      "name": "Magia do Amor Sex Shop",
+      "region": "Asa Norte",
+      "area": "Brasília, DF",
+      "category": "Sex shop e boutique",
+      "summary": "Registro público de uma loja de produtos adultos na região de Asa Norte. Confirme informações diretamente com o estabelecimento.",
+      "coordinates": {
+        "latitude": -15.75,
+        "longitude": -47.88
+      },
+      "theme": "red",
+      "status": "Informação pública",
+      "updatedAt": "11 de setembro de 2026",
+      "sourceLabel": "Pesquisa pública",
+      "sourceUrl": "https://www.google.com/search?q=Magia do Amor Sex Shop Asa Norte Brasília",
+      "newcomerFriendly": false,
+      "gallery": [
+        "night-atmosphere.jpg",
+        "architecture-detail.jpg"
+      ],
+      "editorialSignals": [
+        "Registro público",
+        "Não verificado"
+      ],
+      "notes": [
+        "Registro reunido a partir de referências públicas e sujeito a atualização.",
+        "Endereço, funcionamento, valores e regras devem ser confirmados diretamente."
+      ]
+    },
+    {
+      "slug": "amor-de-luxo-asa-norte",
+      "name": "Sex Shop Amor de Luxo · Asa Norte",
+      "region": "Asa Norte",
+      "area": "Brasília, DF",
+      "category": "Sex shop e boutique",
+      "summary": "Registro público de uma loja de produtos adultos na região de Asa Norte. Confirme informações diretamente com o estabelecimento.",
+      "coordinates": {
+        "latitude": -15.75,
+        "longitude": -47.88
+      },
+      "theme": "red",
+      "status": "Informação pública",
+      "updatedAt": "11 de setembro de 2026",
+      "sourceLabel": "Pesquisa pública",
+      "sourceUrl": "https://www.google.com/search?q=Sex Shop Amor de Luxo Asa Norte Brasília",
+      "newcomerFriendly": false,
+      "gallery": [
+        "night-atmosphere.jpg",
+        "architecture-detail.jpg"
+      ],
+      "editorialSignals": [
+        "Registro público",
+        "Não verificado"
+      ],
+      "notes": [
+        "Registro reunido a partir de referências públicas e sujeito a atualização.",
+        "Endereço, funcionamento, valores e regras devem ser confirmados diretamente."
+      ]
+    },
+    {
+      "slug": "amor-de-luxo-sia",
+      "name": "Sex Shop Amor de Luxo · SIA",
+      "region": "SIA / Multifeira",
+      "area": "Brasília, DF",
+      "category": "Sex shop e boutique",
+      "summary": "Registro público de uma loja de produtos adultos na região de SIA / Multifeira. Confirme informações diretamente com o estabelecimento.",
+      "coordinates": {
+        "latitude": -15.79,
+        "longitude": -47.95
+      },
+      "theme": "red",
+      "status": "Informação pública",
+      "updatedAt": "11 de setembro de 2026",
+      "sourceLabel": "Pesquisa pública",
+      "sourceUrl": "https://www.google.com/search?q=Sex Shop Amor de Luxo SIA Brasília",
+      "newcomerFriendly": false,
+      "gallery": [
+        "night-atmosphere.jpg",
+        "architecture-detail.jpg"
+      ],
+      "editorialSignals": [
+        "Registro público",
+        "Não verificado"
+      ],
+      "notes": [
+        "Registro reunido a partir de referências públicas e sujeito a atualização.",
+        "Endereço, funcionamento, valores e regras devem ser confirmados diretamente."
+      ]
+    },
+    {
+      "slug": "saliencia-asa-norte",
+      "name": "Sex Shop Saliência · Asa Norte",
+      "region": "Asa Norte",
+      "area": "Brasília, DF",
+      "category": "Sex shop e boutique",
+      "summary": "Registro público de uma loja de produtos adultos na região de Asa Norte. Confirme informações diretamente com o estabelecimento.",
+      "coordinates": {
+        "latitude": -15.75,
+        "longitude": -47.88
+      },
+      "theme": "red",
+      "status": "Informação pública",
+      "updatedAt": "11 de setembro de 2026",
+      "sourceLabel": "Pesquisa pública",
+      "sourceUrl": "https://www.google.com/search?q=Sex Shop Saliência Asa Norte Brasília",
+      "newcomerFriendly": false,
+      "gallery": [
+        "night-atmosphere.jpg",
+        "architecture-detail.jpg"
+      ],
+      "editorialSignals": [
+        "Registro público",
+        "Não verificado"
+      ],
+      "notes": [
+        "Registro reunido a partir de referências públicas e sujeito a atualização.",
+        "Endereço, funcionamento, valores e regras devem ser confirmados diretamente."
+      ]
+    },
+    {
+      "slug": "saliencia-conic",
+      "name": "Sex Shop Saliência · CONIC",
+      "region": "Setor de Diversões Sul",
+      "area": "Brasília, DF",
+      "category": "Sex shop e boutique",
+      "summary": "Registro público de uma loja de produtos adultos na região de Setor de Diversões Sul. Confirme informações diretamente com o estabelecimento.",
+      "coordinates": {
+        "latitude": -15.79,
+        "longitude": -47.89
+      },
+      "theme": "red",
+      "status": "Informação pública",
+      "updatedAt": "11 de setembro de 2026",
+      "sourceLabel": "Pesquisa pública",
+      "sourceUrl": "https://www.google.com/search?q=Sex Shop Saliência CONIC Brasília",
+      "newcomerFriendly": false,
+      "gallery": [
+        "night-atmosphere.jpg",
+        "architecture-detail.jpg"
+      ],
+      "editorialSignals": [
+        "Registro público",
+        "Não verificado"
+      ],
+      "notes": [
+        "Registro reunido a partir de referências públicas e sujeito a atualização.",
+        "Endereço, funcionamento, valores e regras devem ser confirmados diretamente."
+      ]
+    },
+    {
+      "slug": "erotika-asa-norte",
+      "name": "Erotika Sex Shop Asa Norte",
+      "region": "Asa Norte",
+      "area": "Brasília, DF",
+      "category": "Sex shop e boutique",
+      "summary": "Registro público de uma loja de produtos adultos na região de Asa Norte. Confirme informações diretamente com o estabelecimento.",
+      "coordinates": {
+        "latitude": -15.75,
+        "longitude": -47.88
+      },
+      "theme": "red",
+      "status": "Informação pública",
+      "updatedAt": "11 de setembro de 2026",
+      "sourceLabel": "Pesquisa pública",
+      "sourceUrl": "https://www.google.com/search?q=Erotika Sex Shop Asa Norte Brasília",
+      "newcomerFriendly": false,
+      "gallery": [
+        "night-atmosphere.jpg",
+        "architecture-detail.jpg"
+      ],
+      "editorialSignals": [
+        "Registro público",
+        "Não verificado"
+      ],
+      "notes": [
+        "Registro reunido a partir de referências públicas e sujeito a atualização.",
+        "Endereço, funcionamento, valores e regras devem ser confirmados diretamente."
+      ]
+    },
+    {
+      "slug": "erotika-sudoeste",
+      "name": "Erotika Sex Shop Sudoeste",
+      "region": "Sudoeste",
+      "area": "Brasília, DF",
+      "category": "Sex shop e boutique",
+      "summary": "Registro público de uma loja de produtos adultos na região de Sudoeste. Confirme informações diretamente com o estabelecimento.",
+      "coordinates": {
+        "latitude": -15.8,
+        "longitude": -47.92
+      },
+      "theme": "red",
+      "status": "Informação pública",
+      "updatedAt": "11 de setembro de 2026",
+      "sourceLabel": "Pesquisa pública",
+      "sourceUrl": "https://www.google.com/search?q=Erotika Sex Shop Sudoeste Brasília",
+      "newcomerFriendly": false,
+      "gallery": [
+        "night-atmosphere.jpg",
+        "architecture-detail.jpg"
+      ],
+      "editorialSignals": [
+        "Registro público",
+        "Não verificado"
+      ],
+      "notes": [
+        "Registro reunido a partir de referências públicas e sujeito a atualização.",
+        "Endereço, funcionamento, valores e regras devem ser confirmados diretamente."
+      ]
+    },
+    {
+      "slug": "ideia-sexy-asa-norte",
+      "name": "Ideia Sexy Sex Shop",
+      "region": "Asa Norte",
+      "area": "Brasília, DF",
+      "category": "Sex shop e boutique",
+      "summary": "Registro público de uma loja de produtos adultos na região de Asa Norte. Confirme informações diretamente com o estabelecimento.",
+      "coordinates": {
+        "latitude": -15.75,
+        "longitude": -47.88
+      },
+      "theme": "red",
+      "status": "Informação pública",
+      "updatedAt": "11 de setembro de 2026",
+      "sourceLabel": "Pesquisa pública",
+      "sourceUrl": "https://www.google.com/search?q=Ideia Sexy Sex Shop Asa Norte Brasília",
+      "newcomerFriendly": false,
+      "gallery": [
+        "night-atmosphere.jpg",
+        "architecture-detail.jpg"
+      ],
+      "editorialSignals": [
+        "Registro público",
+        "Não verificado"
+      ],
+      "notes": [
+        "Registro reunido a partir de referências públicas e sujeito a atualização.",
+        "Endereço, funcionamento, valores e regras devem ser confirmados diretamente."
+      ]
+    },
+    {
+      "slug": "eros-shop",
+      "name": "Eros Shop",
+      "region": "Brasília",
+      "area": "Brasília, DF",
+      "category": "Sex shop e boutique",
+      "summary": "Registro público de uma loja de produtos adultos na região de Brasília. Confirme informações diretamente com o estabelecimento.",
+      "coordinates": {
+        "latitude": -15.79,
+        "longitude": -47.89
+      },
+      "theme": "red",
+      "status": "Informação pública",
+      "updatedAt": "11 de setembro de 2026",
+      "sourceLabel": "Pesquisa pública",
+      "sourceUrl": "https://www.google.com/search?q=Eros Shop Brasília",
+      "newcomerFriendly": false,
+      "gallery": [
+        "night-atmosphere.jpg",
+        "architecture-detail.jpg"
+      ],
+      "editorialSignals": [
+        "Registro público",
+        "Não verificado"
+      ],
+      "notes": [
+        "Registro reunido a partir de referências públicas e sujeito a atualização.",
+        "Endereço, funcionamento, valores e regras devem ser confirmados diretamente."
+      ]
+    },
+    {
+      "slug": "afrodith",
+      "name": "Afrodith",
+      "region": "Brasília",
+      "area": "Brasília, DF",
+      "category": "Sex shop e boutique",
+      "summary": "Registro público de uma loja de produtos adultos na região de Brasília. Confirme informações diretamente com o estabelecimento.",
+      "coordinates": {
+        "latitude": -15.79,
+        "longitude": -47.89
+      },
+      "theme": "red",
+      "status": "Informação pública",
+      "updatedAt": "11 de setembro de 2026",
+      "sourceLabel": "Pesquisa pública",
+      "sourceUrl": "https://www.google.com/search?q=Afrodith sex shop Brasília",
+      "newcomerFriendly": false,
+      "gallery": [
+        "night-atmosphere.jpg",
+        "architecture-detail.jpg"
+      ],
+      "editorialSignals": [
+        "Registro público",
+        "Não verificado"
+      ],
+      "notes": [
+        "Registro reunido a partir de referências públicas e sujeito a atualização.",
+        "Endereço, funcionamento, valores e regras devem ser confirmados diretamente."
+      ]
+    },
+    {
+      "slug": "loulyta-boutique-sensual",
+      "name": "Loulyta Boutique Sensual",
+      "region": "Brasília",
+      "area": "Brasília, DF",
+      "category": "Sex shop e boutique",
+      "summary": "Registro público de uma loja de produtos adultos na região de Brasília. Confirme informações diretamente com o estabelecimento.",
+      "coordinates": {
+        "latitude": -15.79,
+        "longitude": -47.89
+      },
+      "theme": "red",
+      "status": "Informação pública",
+      "updatedAt": "11 de setembro de 2026",
+      "sourceLabel": "Pesquisa pública",
+      "sourceUrl": "https://www.google.com/search?q=Loulyta Boutique Sensual Brasília",
+      "newcomerFriendly": false,
+      "gallery": [
+        "night-atmosphere.jpg",
+        "architecture-detail.jpg"
+      ],
+      "editorialSignals": [
+        "Registro público",
+        "Não verificado"
+      ],
+      "notes": [
+        "Registro reunido a partir de referências públicas e sujeito a atualização.",
+        "Endereço, funcionamento, valores e regras devem ser confirmados diretamente."
+      ]
+    }
+  ]
+}

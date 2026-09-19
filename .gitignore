@@ -1,0 +1,12 @@
+.DS_Store
+.build/
+DerivedData/
+iosApp/*.xcodeproj
+iosApp/*.xcworkspace
+*.mobileprovision
+*.p12
+*.cer
+*.csr
+*.key
+AuthKey_*.p8
+scripts/.swing-brasilia-distribution.*
