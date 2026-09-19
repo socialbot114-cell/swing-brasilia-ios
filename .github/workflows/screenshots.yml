@@ -49,7 +49,8 @@ jobs:
                       candidates.append((ver, rank, n, d["udid"]))
           if not candidates:
               raise SystemExit("no available iPhone simulator")
-          ver, rank, name, udid = max(candidates)
+          preferred = [c for c in candidates if c[2] in ("iPhone 11 Pro Max", "iPhone XS Max")]
+          ver, rank, name, udid = max(preferred or candidates)
           print(udid)
           print("Selected {} on iOS {}".format(name, ".".join(map(str, ver))), file=sys.stderr)
           ')"
