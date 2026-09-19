@@ -50,7 +50,7 @@ jobs:
               raise SystemExit("no available iPhone simulator")
           ver, rank, name, udid = max(candidates)
           print(udid)
-          print(f"Selected {name} on iOS {'.'.join(map(str, ver))}", file=sys.stderr)
+          print("Selected {} on iOS {}".format(name, ".".join(map(str, ver))), file=sys.stderr)
           ')"
           xcrun simctl boot "$udid" 2>/dev/null || true
           xcrun simctl bootstatus "$udid" -b
