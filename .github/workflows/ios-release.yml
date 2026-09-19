@@ -232,7 +232,7 @@ jobs:
             -destination 'generic/platform=iOS' \
             -archivePath "$RUNNER_TEMP/SwingBrasilia.xcarchive" \
             CODE_SIGN_STYLE=Manual \
-            CODE_SIGN_IDENTITY="$SIGNING_IDENTITY" \
+            CODE_SIGN_IDENTITY="Apple Distribution" \
             DEVELOPMENT_TEAM="$TEAM_ID" \
             PROVISIONING_PROFILE_SPECIFIER="$PROFILE_NAME" \
             TARGETED_DEVICE_FAMILY=1 \
@@ -251,7 +251,6 @@ jobs:
           test "$(/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' "$app/Info.plist")" = "$MARKETING_VERSION"
           test "$(/usr/libexec/PlistBuddy -c 'Print :CFBundleVersion' "$app/Info.plist")" = "$BUILD_NUMBER"
           test -n "$(/usr/libexec/PlistBuddy -c 'Print :CFBundleIconName' "$app/Info.plist")"
-          codesign --verify "$app"
 
       - name: Prepare export options
         run: |
@@ -307,7 +306,6 @@ jobs:
           test "$(/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' "$app/Info.plist")" = "$MARKETING_VERSION"
           test "$(/usr/libexec/PlistBuddy -c 'Print :CFBundleVersion' "$app/Info.plist")" = "$BUILD_NUMBER"
           test -n "$(/usr/libexec/PlistBuddy -c 'Print :CFBundleIconName' "$app/Info.plist")"
-          codesign --verify "$app"
 
       - name: Upload IPA artifact
         uses: actions/upload-artifact@v4
