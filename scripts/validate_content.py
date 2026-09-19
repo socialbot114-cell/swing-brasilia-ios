@@ -4,6 +4,7 @@ import json
 import re
 import plistlib
 from pathlib import Path
+from urllib.parse import urlparse
 
 ROOT = Path(__file__).parents[1]
 CATALOG_PATH = ROOT / "iosApp/Resources/Catalog/venues.json"
@@ -11,6 +12,7 @@ IMAGES_PATH = ROOT / "iosApp/Resources/Images"
 APPICON_PATH = ROOT / "iosApp/Resources/Assets.xcassets/AppIcon.appiconset"
 INFOPLIST_PATH = ROOT / "iosApp/Info.plist"
 PRIVACY_PATH = ROOT / "iosApp/Resources/PrivacyInfo.xcprivacy"
+CREDITS_PATH = ROOT / "docs/content/image-credits.json"
 
 CATEGORIES = {"Casa liberal", "Motel e suíte", "Sex shop e boutique"}
 THEMES = {"red", "ivory"}
@@ -55,6 +57,9 @@ def validate_venue(venue, index, image_files):
 
     for field in ("slug", "name", "region", "area", "summary", "status", "updatedAt", "sourceLabel", "sourceUrl"):
         require_text(venue[field], f"{label}.{field}")
+    parsed_source = urlparse(venue["sourceUrl"])
+    require(parsed_source.scheme in {"http", "https"} and parsed_source.netloc, f"{label}.sourceUrl inválida")
+    require(not (parsed_source.netloc == "www.google.com" and parsed_source.path == "/search"), f"{label}.sourceUrl deve ser uma fonte oficial, não uma busca do Google")
 
     require(SLUG_PATTERN.fullmatch(venue["slug"]), f"{label}.slug deve ser um slug ASCII")
     require(venue["category"] in CATEGORIES, f"{label}.category inválida: {venue['category']!r}")
@@ -86,6 +91,18 @@ def validate_images():
     return {path.name for path in IMAGES_PATH.iterdir() if path.is_file()}
 
 
+def validate_credits():
+    require(CREDITS_PATH.is_file(), f"Créditos de imagens ausentes: {CREDITS_PATH}")
+    credits = json.loads(CREDITS_PATH.read_text(encoding="utf-8"))
+    require(credits.get("status") == "approved", "Créditos de imagens ainda não foram aprovados")
+    for item in credits.get("items", []):
+        image_id = item.get("id", "<sem id>")
+        require(item.get("author"), f"Autor ausente para a imagem {image_id}")
+        require(item.get("source"), f"Fonte ausente para a imagem {image_id}")
+        require(item.get("license"), f"Licença ausente para a imagem {image_id}")
+        require(item.get("reviewStatus") == "approved", f"Imagem não aprovada: {image_id}")
+
+
 def validate_app_icon():
     require(APPICON_PATH.is_dir(), f"AppIcon ausente: {APPICON_PATH}")
     for size in (1024, 180, 120):
@@ -107,6 +124,7 @@ def validate_plists():
 def main():
     venues = load_catalog()
     image_files = validate_images()
+    validate_credits()
     validate_app_icon()
     validate_plists()
 

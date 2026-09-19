@@ -25,11 +25,13 @@ struct RootView: View {
         .fullScreenCover(isPresented: ageGateBinding) {
             AgeGateView().environmentObject(ageGate)
         }
+#if DEBUG
         .onAppear {
             if ProcessInfo.processInfo.environment["SWING_SKIP_AGE"] == "1" {
                 ageGate.confirm()
             }
         }
+#endif
     }
 
     private var ageGateBinding: Binding<Bool> {
