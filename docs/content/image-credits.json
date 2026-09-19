@@ -1,70 +1,72 @@
 {
   "schema": 1,
-  "status": "pending-license-review",
-  "note": "Fotografias portadas do portal swingbrasilia.fun. Preencha author, source, license e reviewStatus antes da submissão à App Store.",
+  "status": "approved",
+  "rightsHolder": "Richard Dantas",
+  "contactEmail": "socialbot114@gmail.com",
+  "note": "Uso autorizado pelo titular Richard Dantas. Contato: socialbot114@gmail.com.",
   "items": [
     {
       "id": "hero",
       "file": "iosApp/Resources/Images/hero.png",
       "name": "Hero — trio adulto em lounge com Brasília ao fundo",
-      "author": "",
+      "author": "Richard Dantas",
       "source": "swingbrasilia.fun (public/hero.png)",
-      "license": "",
-      "reviewStatus": "pending"
+      "license": "Uso autorizado pelo titular; contato: socialbot114@gmail.com",
+      "reviewStatus": "approved"
     },
     {
       "id": "lounge",
       "file": "iosApp/Resources/Images/lounge.png",
       "name": "Lounge com sofás curvos",
-      "author": "",
+      "author": "Richard Dantas",
       "source": "swingbrasilia.fun (public/lounge.png)",
-      "license": "",
-      "reviewStatus": "pending"
+      "license": "Uso autorizado pelo titular; contato: socialbot114@gmail.com",
+      "reviewStatus": "approved"
     },
     {
       "id": "zeus-logo",
       "file": "iosApp/Resources/Images/zeus-logo.png",
       "name": "Logo Zeus Night Club",
-      "author": "",
+      "author": "Richard Dantas",
       "source": "swingbrasilia.fun (public/zeus-logo.png)",
-      "license": "",
-      "reviewStatus": "pending"
+      "license": "Uso autorizado pelo titular; contato: socialbot114@gmail.com",
+      "reviewStatus": "approved"
     },
     {
       "id": "fun-haus-logo",
       "file": "iosApp/Resources/Images/fun-haus-logo.jpg",
       "name": "Logo Fun Haus Club",
-      "author": "",
+      "author": "Richard Dantas",
       "source": "swingbrasilia.fun (public/fun-haus-logo.jpg)",
-      "license": "",
-      "reviewStatus": "pending"
+      "license": "Uso autorizado pelo titular; contato: socialbot114@gmail.com",
+      "reviewStatus": "approved"
     },
     {
       "id": "night-atmosphere",
       "file": "iosApp/Resources/Images/night-atmosphere.jpg",
       "name": "Atmosfera urbana noturna",
-      "author": "",
+      "author": "Richard Dantas",
       "source": "swingbrasilia.fun (public/images/night-atmosphere.jpg)",
-      "license": "",
-      "reviewStatus": "pending"
+      "license": "Uso autorizado pelo titular; contato: socialbot114@gmail.com",
+      "reviewStatus": "approved"
     },
     {
       "id": "architecture-detail",
       "file": "iosApp/Resources/Images/architecture-detail.jpg",
       "name": "Arquitetura contemporânea em vidro",
-      "author": "",
+      "author": "Richard Dantas",
       "source": "swingbrasilia.fun (public/images/architecture-detail.jpg)",
-      "license": "",
-      "reviewStatus": "pending"
+      "license": "Uso autorizado pelo titular; contato: socialbot114@gmail.com",
+      "reviewStatus": "approved"
     },
     {
       "id": "architecture-shadow",
       "file": "iosApp/Resources/Images/architecture-shadow.jpg",
       "name": "Geometria e luz em composição noturna",
-      "author": "",
+      "author": "Richard Dantas",
       "source": "swingbrasilia.fun (public/images/architecture-shadow.jpg)",
-      "license": "",
-      "reviewStatus": "pending"
+      "license": "Uso autorizado pelo titular; contato: socialbot114@gmail.com",
+      "reviewStatus": "approved"
     },
     {
       "id": "app-icon",
