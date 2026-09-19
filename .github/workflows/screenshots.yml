@@ -44,7 +44,8 @@ jobs:
               for d in devices:
                   if d.get("isAvailable") and d.get("name", "").startswith("iPhone"):
                       n = d["name"]
-                      rank = 3 if "Pro Max" in n else 2 if ("Pro" in n or "Max" in n or "Plus" in n) else 1 if "Air" in n else 0
+                      # App Store Connect requires the 6.5-inch slot: use XS Max/11 Pro Max.
+                      rank = 5 if n in ("iPhone 11 Pro Max", "iPhone XS Max") else 2 if "Pro Max" in n else 1 if ("Pro" in n or "Max" in n or "Plus" in n) else 0
                       candidates.append((ver, rank, n, d["udid"]))
           if not candidates:
               raise SystemExit("no available iPhone simulator")
