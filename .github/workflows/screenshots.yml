@@ -82,6 +82,11 @@ jobs:
           shoot "03-explorar" SIMCTL_CHILD_SWING_SKIP_AGE=1 SIMCTL_CHILD_SWING_TAB=1
           shoot "04-comunidade" SIMCTL_CHILD_SWING_SKIP_AGE=1 SIMCTL_CHILD_SWING_TAB=2
           shoot "05-tecnologia" SIMCTL_CHILD_SWING_SKIP_AGE=1 SIMCTL_CHILD_SWING_TAB=3
+          # The hosted runner currently has no 6.5-inch simulator. Convert to Apple's
+          # exact iPhone XS Max/11 Pro Max screenshot dimensions for App Store Connect.
+          for image in "$RUNNER_TEMP"/screenshots/*.png; do
+            sips -z 2688 1242 "$image" --out "$image" >/dev/null
+          done
           ls -la "$RUNNER_TEMP/screenshots"
 
       - name: Upload screenshots
