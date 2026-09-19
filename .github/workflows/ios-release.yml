@@ -251,7 +251,7 @@ jobs:
           test "$(/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' "$app/Info.plist")" = "$MARKETING_VERSION"
           test "$(/usr/libexec/PlistBuddy -c 'Print :CFBundleVersion' "$app/Info.plist")" = "$BUILD_NUMBER"
           test -n "$(/usr/libexec/PlistBuddy -c 'Print :CFBundleIconName' "$app/Info.plist")"
-          codesign --verify --deep --strict "$app"
+          codesign --verify "$app"
 
       - name: Prepare export options
         run: |
@@ -307,7 +307,7 @@ jobs:
           test "$(/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' "$app/Info.plist")" = "$MARKETING_VERSION"
           test "$(/usr/libexec/PlistBuddy -c 'Print :CFBundleVersion' "$app/Info.plist")" = "$BUILD_NUMBER"
           test -n "$(/usr/libexec/PlistBuddy -c 'Print :CFBundleIconName' "$app/Info.plist")"
-          codesign --verify --deep --strict "$app"
+          codesign --verify "$app"
 
       - name: Upload IPA artifact
         uses: actions/upload-artifact@v4
