@@ -25,7 +25,7 @@ targets:
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: br.com.swingbrasilia.fun
-        PRODUCT_NAME: "Swing Brasília"
+        PRODUCT_NAME: "SwingBrasilia"
         PRODUCT_MODULE_NAME: SwingBrasilia
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         INFOPLIST_FILE: Info.plist
@@ -47,6 +47,6 @@ targets:
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: br.com.swingbrasilia.fun.tests
-        TEST_HOST: "$(BUILT_PRODUCTS_DIR)/Swing Brasília.app/Swing Brasília"
+        TEST_HOST: "$(BUILT_PRODUCTS_DIR)/SwingBrasilia.app/SwingBrasilia"
         BUNDLE_LOADER: "$(TEST_HOST)"
         GENERATE_INFOPLIST_FILE: YES
