@@ -1,0 +1,91 @@
+name: iOS Screenshots
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  screenshots:
+    runs-on: macos-26
+    timeout-minutes: 30
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+
+      - name: Install XcodeGen
+        run: brew install xcodegen
+
+      - name: Generate project
+        working-directory: iosApp
+        run: xcodegen generate --spec project.yml
+
+      - name: Build app for simulator
+        run: |
+          set -euo pipefail
+          xcodebuild build \
+            -project iosApp/SwingBrasilia.xcodeproj \
+            -scheme SwingBrasilia \
+            -destination 'generic/platform=iOS Simulator' \
+            -derivedDataPath "$RUNNER_TEMP/build" \
+            CODE_SIGNING_ALLOWED=NO
+
+      - name: Select and boot simulator
+        run: |
+          set -euo pipefail
+          udid="$(xcrun simctl list devices available -j | python3 -c '
+          import json, re, sys
+          data = json.load(sys.stdin)["devices"]
+          candidates = []
+          for runtime, devices in data.items():
+              m = re.search(r"iOS-(\d+)(?:-(\d+))?(?:-(\d+))?$", runtime)
+              ver = tuple(map(int, m.groups(default="0"))) if m else (0, 0, 0)
+              for d in devices:
+                  if d.get("isAvailable") and d.get("name", "").startswith("iPhone"):
+                      n = d["name"]
+                      rank = 3 if "Pro Max" in n else 2 if ("Pro" in n or "Max" in n or "Plus" in n) else 1 if "Air" in n else 0
+                      candidates.append((ver, rank, n, d["udid"]))
+          if not candidates:
+              raise SystemExit("no available iPhone simulator")
+          ver, rank, name, udid = max(candidates)
+          print(udid)
+          print(f"Selected {name} on iOS {'.'.join(map(str, ver))}", file=sys.stderr)
+          ')"
+          xcrun simctl boot "$udid" 2>/dev/null || true
+          xcrun simctl bootstatus "$udid" -b
+          xcrun simctl status_bar "$udid" override --time "9:41" --batteryState charged --batteryLevel 100 2>/dev/null || true
+          printf 'UDID=%s\n' "$udid" >> "$GITHUB_ENV"
+
+      - name: Install app
+        run: |
+          set -euo pipefail
+          app="$RUNNER_TEMP/build/Build/Products/Debug-iphonesimulator/SwingBrasilia.app"
+          test -d "$app"
+          xcrun simctl install "$UDID" "$app"
+
+      - name: Capture screenshots
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/screenshots"
+          shoot() {
+            local name="$1"; shift
+            xcrun simctl terminate "$UDID" br.com.swingbrasilia.fun 2>/dev/null || true
+            env "$@" xcrun simctl launch "$UDID" br.com.swingbrasilia.fun >/dev/null
+            sleep 3
+            xcrun simctl io "$UDID" screenshot "$RUNNER_TEMP/screenshots/$name.png"
+          }
+          shoot "01-age-gate"
+          shoot "02-home" SIMCTL_CHILD_SWING_SKIP_AGE=1 SIMCTL_CHILD_SWING_TAB=0
+          shoot "03-explorar" SIMCTL_CHILD_SWING_SKIP_AGE=1 SIMCTL_CHILD_SWING_TAB=1
+          shoot "04-comunidade" SIMCTL_CHILD_SWING_SKIP_AGE=1 SIMCTL_CHILD_SWING_TAB=2
+          shoot "05-tecnologia" SIMCTL_CHILD_SWING_SKIP_AGE=1 SIMCTL_CHILD_SWING_TAB=3
+          ls -la "$RUNNER_TEMP/screenshots"
+
+      - name: Upload screenshots
+        uses: actions/upload-artifact@v4
+        with:
+          name: swing-brasilia-screenshots
+          path: ${{ runner.temp }}/screenshots/*.png
+          if-no-files-found: error
+          retention-days: 7

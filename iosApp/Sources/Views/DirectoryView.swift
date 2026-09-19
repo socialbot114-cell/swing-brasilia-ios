@@ -11,38 +11,40 @@ struct DirectoryView: View {
     }
 
     var body: some View {
-        VStack(spacing: 0) {
-            notice
-            searchBar
-            chips
-            ScrollView {
-                LazyVStack(spacing: 12) {
-                    ForEach(Array(results.enumerated()), id: \.element.id) { index, venue in
-                        NavigationLink {
-                            VenueDetailView(venue: venue)
-                        } label: {
-                            VenueRow(venue: venue, index: index + 1)
+        NavigationStack {
+            VStack(spacing: 0) {
+                notice
+                searchBar
+                chips
+                ScrollView {
+                    LazyVStack(spacing: 12) {
+                        ForEach(Array(results.enumerated()), id: \.element.id) { index, venue in
+                            NavigationLink {
+                                VenueDetailView(venue: venue)
+                            } label: {
+                                VenueRow(venue: venue, index: index + 1)
+                            }
+                            .buttonStyle(.plain)
                         }
-                        .buttonStyle(.plain)
-                    }
-                    if results.isEmpty {
-                        VStack(spacing: 8) {
-                            Text("Nenhum registro encontrado.")
-                                .font(.headline)
-                                .foregroundStyle(SwingTheme.Palette.textPrimary)
-                            Text("Tente buscar por outra região ou categoria.")
-                                .font(.subheadline)
-                                .foregroundStyle(SwingTheme.Palette.textSecondary)
+                        if results.isEmpty {
+                            VStack(spacing: 8) {
+                                Text("Nenhum registro encontrado.")
+                                    .font(.headline)
+                                    .foregroundStyle(SwingTheme.Palette.textPrimary)
+                                Text("Tente buscar por outra região ou categoria.")
+                                    .font(.subheadline)
+                                    .foregroundStyle(SwingTheme.Palette.textSecondary)
+                            }
+                            .padding(.top, 40)
                         }
-                        .padding(.top, 40)
                     }
+                    .padding(16)
                 }
-                .padding(16)
             }
+            .background(SwingTheme.Palette.background)
+            .navigationTitle("Explore Brasília")
+            .navigationBarTitleDisplayMode(.inline)
         }
-        .background(SwingTheme.Palette.background)
-        .navigationTitle("Explore Brasília")
-        .navigationBarTitleDisplayMode(.inline)
     }
 
     private var notice: some View {

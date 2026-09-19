@@ -16,17 +16,19 @@ struct RulesView: View {
     ]
 
     var body: some View {
-        ScrollView {
-            VStack(spacing: 24) {
-                hero
-                rulesList
-                acceptCard
+        NavigationStack {
+            ScrollView {
+                VStack(spacing: 24) {
+                    hero
+                    rulesList
+                    acceptCard
+                }
+                .padding(20)
             }
-            .padding(20)
+            .background(SwingTheme.Palette.background)
+            .navigationTitle("Comunidade")
+            .navigationBarTitleDisplayMode(.inline)
         }
-        .background(SwingTheme.Palette.background)
-        .navigationTitle("Comunidade")
-        .navigationBarTitleDisplayMode(.inline)
     }
 
     private var hero: some View {

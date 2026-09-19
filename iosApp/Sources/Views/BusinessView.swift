@@ -13,17 +13,19 @@ struct BusinessView: View {
     ]
 
     var body: some View {
-        ScrollView {
-            VStack(spacing: 24) {
-                hero
-                serviceGrid
-                cta
+        NavigationStack {
+            ScrollView {
+                VStack(spacing: 24) {
+                    hero
+                    serviceGrid
+                    cta
+                }
+                .padding(20)
             }
-            .padding(20)
+            .background(SwingTheme.Palette.background)
+            .navigationTitle("Tecnologia")
+            .navigationBarTitleDisplayMode(.inline)
         }
-        .background(SwingTheme.Palette.background)
-        .navigationTitle("Tecnologia")
-        .navigationBarTitleDisplayMode(.inline)
     }
 
     private var hero: some View {
