@@ -40,6 +40,7 @@ struct DirectoryView: View {
                     }
                     .padding(16)
                 }
+                .safeAreaPadding(.bottom, 96)
             }
             .background(SwingTheme.Palette.background)
             .navigationTitle("Explore Brasília")

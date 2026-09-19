@@ -19,7 +19,9 @@ struct HomeView: View {
                     guidePreview
                     businessBridge
                 }
+                .frame(maxWidth: .infinity)
             }
+            .safeAreaPadding(.bottom, 96)
             .background(SwingTheme.Palette.background)
             .toolbar {
                 ToolbarItem(placement: .principal) { Brand() }
@@ -43,7 +45,7 @@ struct HomeView: View {
             VStack(alignment: .leading, spacing: 14) {
                 Eyebrow(text: "Comunidade liberal · Brasília")
                 Text("Brasília além do convencional.")
-                    .font(.system(size: 34, weight: .bold, design: .serif))
+                    .font(.system(size: 32, weight: .bold, design: .serif))
                     .foregroundStyle(.white)
                 Text("Informação, experiências e conexões com respeito e discrição.")
                     .font(.subheadline)
@@ -67,8 +69,9 @@ struct HomeView: View {
                         .foregroundStyle(.white)
                 }
             }
-            .padding(24)
+            .padding(20)
         }
+        .frame(maxWidth: .infinity)
         .overlay(alignment: .topTrailing) {
             Text("18+")
                 .font(.caption.weight(.black))

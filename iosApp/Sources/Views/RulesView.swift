@@ -25,6 +25,7 @@ struct RulesView: View {
                 }
                 .padding(20)
             }
+            .safeAreaPadding(.bottom, 96)
             .background(SwingTheme.Palette.background)
             .navigationTitle("Comunidade")
             .navigationBarTitleDisplayMode(.inline)
